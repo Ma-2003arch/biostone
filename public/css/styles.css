@@ -1,0 +1,358 @@
+< !DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>BIO-STONE | Nos Services</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><style>
+/* Votre CSS personnalisé ici */
+</style></head><body class="bg-green-50 font-['Poppins']"><header class="bg-gradient-to-br from-green-800 to-green-900 text-white text-center py-8 px-4 shadow-lg"><h1 class="text-4xl font-bold mb-2">BIO - STONE</h1><p class="text-xl mb-1">Production - Transformation - Exportation de Produits Biologiques</p><p class="text-lg">Fourniture d'Équipements et Matériels Agricoles | Commerce Général Import - Export</p>
+ </header><main class="max-w-6xl mx-auto px-6 py-12 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"><div class="flex justify-center mb-10"><img src="images/logo.jpg" alt="Logo Bio-Stone" class="h-28 rounded-lg shadow-md"></div><h2 class="text-2xl font-bold text-center py-3 px-6 bg-gradient-to-r from-green-700 to-green-800 text-yellow-400 rounded-full inline-block mx-auto shadow mb-12">NOS SERVICES </h2><div class="grid md:grid-cols-2 gap-6 text-gray-700">< !-- Service Items avec animation --><div class="service-item flex items-start gap-3 p-4 hover:bg-green-50 rounded-lg transition"><span class="text-green-600 text-xl">✔</span><p>Organisation des producteurs individuels en coopératives agricoles</p></div>< !-- Répétez pour chaque service --></div><div class="flex justify-center mt-16 gap-8 flex-wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Logo_PND_Togo.png"
+alt="PND"
+class="client-logo h-14 grayscale hover:grayscale-0 transition-all">< !-- Autres logos avec la même classe --></div></main><footer class="bg-green-900 text-white text-center py-6 mt-16 relative"><div class="max-w-2xl mx-auto px-4"><p class="text-lg italic">"Ensemble, Transformons l’Agriculture africaine..." </p><p class="mt-4 text-sm">© 2023 BIO-STONE - Tous droits réservés</p></div></footer></body></html>
+
+/* projetcss */
+/* Style général de la section */
+.realisations-section {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* En-tête de section */
+.section-header {
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #7f8c8d;
+    font-size: 1.2rem;
+}
+
+.header-divider {
+    width: 80px;
+    height: 4px;
+    background-color: #27ae60;
+    margin: 1.5rem auto;
+}
+
+/* Cartes de projet */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-container {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+}
+
+/* Statistiques du projet */
+.project-stats {
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+/* Boutons */
+.btn-primary {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #219653;
+    border-color: #219653;
+}
+
+.btn-outline-primary {
+    color: #27ae60;
+    border-color: #27ae60;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+    background-color: #27ae60;
+    color: white;
+}
+
+/* Témoignage */
+.testimonial {
+    position: relative;
+    padding: 0 1rem;
+}
+
+.testimonial-avatar img {
+    border: 3px solid #27ae60;
+    object-fit: cover;
+}
+
+.testimonial-quote {
+    position: relative;
+    padding: 0 1.5rem;
+}
+
+.testimonial-quote::before,
+.testimonial-quote::after {
+    content: '"';
+    font-size: 3rem;
+    color: #27ae60;
+    opacity: 0.3;
+    position: absolute;
+}
+
+.testimonial-quote::before {
+    top: -20px;
+    left: -5px;
+}
+
+.testimonial-quote::after {
+    bottom: -40px;
+    right: -5px;
+}
+
+.testimonial-author p:last-child {
+    font-size: 0.9rem;
+}
+
+/* Galerie */
+.gallery-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-main-img {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px !important;
+}
+
+.gallery-main-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-grid .row img {
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-img-container {
+        height: 180px;
+    }
+
+    .gallery-main-img {
+        height: 150px;
+    }
+
+    .gallery-grid .row img {
+        height: 80px;
+    }
+}
+
+
+/* nos articlecss */
+/** product **/
+
+/* Structure de base */
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+/* Colonnes Bootstrap */
+.col-xl-8,
+.col-lg-8,
+.col-md-8,
+.col-xl-6,
+.col-lg-6,
+.col-md-6,
+.col-xl-4,
+.col-lg-4,
+.col-md-4,
+.col-xl-12,
+.col-lg-12,
+.col-md-12,
+.col-sm-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Dimensions des colonnes */
+.col-xl-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.col-xl-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-xl-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-xl-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* Conteneur produit */
+.product_box {
+    margin-bottom: 30px;
+}
+
+/* Image produit */
+.product_box figure {
+    margin: 0;
+    position: relative;
+}
+
+.product_box figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Texte sur image (vide dans votre code) */
+.product_box figure h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(5, 37, 1, 0.83);
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .col-lg-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+
+    .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .col-lg-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-md-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

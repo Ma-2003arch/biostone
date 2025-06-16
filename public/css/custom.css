@@ -1,0 +1,264 @@
+/* ---- FORMULAIRE ---- */
+.card {
+    border-radius: 1rem;
+    border: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-floating>label {
+    color: #6c757d;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+/* ---- BOUTONS ---- */
+.btn-success {
+    background-color: #198754;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .card-header {
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+    }
+}
+
+/* code css edit */
+.card {
+    border-radius: 1rem;
+    border: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .d-flex.justify-content-between {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* personnalisé pour la vue articles.show */
+
+/* --- Article Detail Page Styles --- */
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.card-text {
+    color: #333;
+}
+
+.card-text p {
+    margin-bottom: 1rem;
+}
+
+.card img.card-img-top {
+    object-fit: cover;
+    height: auto;
+    max-height: 400px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    font-size: 0.9rem;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d !important;
+    font-size: 0.85rem;
+    padding: 0.4em 0.7em;
+}
+
+.btn-outline-dark,
+.btn-outline-secondary,
+.btn-outline-danger {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Responsive padding for container */
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* --- Styles personnalisés pour la liste des articles --- */
+
+h2 {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004999;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 0.5rem;
+}
+
+.card-text small {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-danger {
+    transition: all 0.3s ease;
+    margin-right: 4px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Alert message style */
+.alert {
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 160px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* tableau de bord */
