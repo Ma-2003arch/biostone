@@ -11,7 +11,8 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $contents = Content::latest()->paginate(10);
-        $users = User::all();
-        return view('admin.dashboard', compact('contents', 'users'));
+       
+        return view('admin.dashboard', compact('contents'));
+        
     }
 }

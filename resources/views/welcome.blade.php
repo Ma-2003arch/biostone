@@ -15,8 +15,14 @@
     <meta name="author" content="">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <!-- style css -->
     <link rel="stylesheet" href="css/style.css">
+    {{-- java script --}}
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        emailjs.init('YOUR_USER_ID'); // Initialiser avec votre ID EmailJS
+    </script>
     <!-- Responsive-->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- fevicon -->
@@ -26,7 +32,8 @@
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-        media="screen">
+        media="screen"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -75,12 +82,13 @@
                                         <nav class="main-menu">
                                             <ul class="menu-area-main">
                                                 <li> <a href="#about">A propos</a> </li>
-                                                <li><a href="#services">Nos services</a></li>
+                                                <li><a href="#services" class="nav-link">Nos services</a></li>
                                                 <li><a href="#contact">Contactez Nous</a></li>
                                                 <li class="nav-item">
-                                                <a class="nav-link {{ request()->is('content*') ? 'active' : '' }}" href="{{ route('content.liste') }}">
-                                                <i class="bi bi-newspaper me-1"></i> Blog & Actualités
-                                                </a>
+                                                    <a class="nav-link {{ request()->is('content*') ? 'active' : '' }}"
+                                                        href="{{ route('content.liste') }}">
+                                                        <i class="bi bi-newspaper me-1"></i> Blog & Actualités
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -127,7 +135,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="second-slide" src="images/banner.jpg" alt="Second slide">
+                    <img class="second-slide" src="images/slider-7.jpg" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption relative">
                             <h1>BIO-STONE</h1>
@@ -187,7 +195,13 @@
                             Nous collaborons avec des ONG, des coopératives, des institutions et des partenaires
                             publics/privés pour maximiser notre impact.
                         </p>
-                        <a href="#">En savoir plus</a>
+                        <div class="container text-center mt-4 mb-5">
+                            <a class="btn btn-agriculture {{ request()->is('content*') ? 'active' : '' }}"
+                                href="{{ route('content.liste') }}"
+                                aria-label="En savoir plus sur nos services agricoles">
+                                <i class="bi bi-newspaper me-2"></i> En savoir plus
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <!-- Image à droite -->
@@ -203,7 +217,7 @@
     <!-- end about -->
 
     <!-- offer -->
-    <div class="offer">
+    <div class="offer" id="services">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -243,9 +257,12 @@
             </div>
             <!-- BOUTON EN SAVOIR PLUS -->
             <div class="col-md-12 text-center" style="margin-top: 30px;">
-                <a href="services.html"
-                    style="display: inline-block; padding: 8px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 10px;">En
-                    savoir plus</a>
+                <div class="container text-center mt-4 mb-5">
+                    <a class="btn btn-agriculture {{ request()->is('content*') ? 'active' : '' }}"
+                        href="{{ route('content.liste') }}" aria-label="En savoir plus sur nos services agricoles">
+                        <button class="bouton-savoir-plus">Savoir plus</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -313,8 +330,9 @@
             </div>
         </div>
         <div class="container text-center mt-4 mb-5">
-            <a href="produits.html" class="btn btn-success btn-lg px-4 py-2">
-                Voir tous nos produits <i class="fas fa-arrow-right ml-2"></i>
+            <a class="btn btn-green {{ request()->is('content*') ? 'active' : '' }}" href="{{ route('content.liste') }}"
+                aria-label="En savoir plus sur nos services agricoles">
+                <button class="bouton-savoir-plus">Savoir plus</button>
             </a>
         </div>
     </div>
@@ -458,34 +476,48 @@
     <div class="container-fluid padddd">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 padddd">
             <div class="map_section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <!-- Affiche le message de succès -->
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
-                            <form class="main_form">
-                                <div class="row">
+<!-- Affiche les erreurs de validation -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <input class="form-control" placeholder="Nom" type="text" name="Name">
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <input class="form-control" placeholder="Email" type="text" name="Email">
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <input class="form-control" placeholder="telephone" type="text" name="Phone">
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <textarea class="textarea" placeholder="Message" type="text"
-                                            name="Message"></textarea>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <button class="send">Envoyer</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<div class="container d-flex justify-content-center">
+    <form class="main_form w-100" method="POST" action="{{ route('contact.store') }}" style="max-width: 55%;">
+        @csrf
+        <div class="row">
+            <div class="col-12">
+                <input class="form-control" placeholder="Nom" type="text" name="Name" required>
+            </div>
+            <div class="col-12 mt-2">
+                <input class="form-control" placeholder="Email" type="email" name="Email" required>
+            </div>
+            <div class="col-12 mt-2">
+                <input class="form-control" placeholder="Téléphone" type="text" name="Phone">
+            </div>
+            <div class="col-12 mt-2">
+                <textarea class="form-control" placeholder="Message" name="Message" required></textarea>
+            </div>
+            <div class="col-12 mt-3">
+                <button class="btn btn-success w-100" type="submit">Envoyer</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
                 <div id="map">
                     <div class="col-lg-7 mb-4">
                         <div class="card h-100">
@@ -508,98 +540,149 @@
     </div>
 
     <!--  footer -->
-    <footr>
-        <div class="footer top_layer ">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="address">
-                            <a href="index.html"> <img src="images/logo.jpg" alt="logo" /></a>
-
-                        </div>
-                        <li>
-                            <a href="#"><img src="icon/email.png" alt="#" /></a>biostonesarl1@gmail.com
-                        </li>
-                        <li>
-                            <a href="#"><img src="icon/call.png" alt="#" /></a>+228 90 59 76 28
-                        </li>
-                        <li>
-                            <a href="#"><img src="icon/call.png" alt="#" /></a>+228 70 15 35 71
-                        </li>
-                        <li>
-                            <a href="#"><img src="icon/call.png" alt="#" /></a>+228 99 16 40 57
-                        </li>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="address">
-                            <h3>Liens utiles</h3>
-                            <ul class="Links_footer">
-                                <li><img src="icon/3.png" alt="#" /> <a href="#"> Whatssap</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">Twitter</a> </li>
-                                <li><img src="icon/3.png" alt="#" /> <a href="#">Facebook</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="address">
-                            <h3>Nos partenaires</h3>
-                            <ul class="Links_footer partners">
-                                <li><img src="images/client-4.PNG" alt="MIFA"></li>
-                                <li><img src="images/client2.jpeg" alt="GIZ"></li>
-                                <li><img src="images/client-13.jpeg" alt="ANPGF"></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="address">
-                            <h3>Contactez nous</h3>
-
-                            <ul class="loca">
-                                <li>
-                                    <a href="#"><img src="icon/loc.png" alt="#" /></a>BP:138 <br> Dapaong-Togo Rue de
-                                    Tantigou a 100m de MRS
-                                    <br>Lome,legbassito
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    <footer class="footer bg-dark text-white py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Colonne Logo & Contact -->
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-brand mb-4">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="BIO-STONE Logo" class="img-fluid" style="max-height: 80px;">
                 </div>
+                <p class="mb-4">Votre partenaire en solutions agricoles durables au Togo.</p>
+                
+                <div class="contact-info">
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-envelope fs-5 me-3 mt-1"></i>
+                            <a href="mailto:biostonesarl1@gmail.com" class="text-white text-decoration-none">biostonesarl1@gmail.com</a>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i class="bi bi-telephone fs-5 me-3 mt-1"></i>
+                            <div>
+                                <a href="tel:+22890597628" class="text-white text-decoration-none d-block">+228 90 59 76 28</a>
+                                <a href="tel:+22870153571" class="text-white text-decoration-none d-block">+228 70 15 35 71</a>
+                                <a href="tel:+22899164057" class="text-white text-decoration-none d-block">+228 99 16 40 57</a>
+                            </div>
+        </li>
+                        <li class="d-flex align-items-start">
+            <i class="bi bi-geo-alt fs-5 me-3 mt-1"></i>
+            <span>BP:138 Dapaong-Togo<br>Rue de Tantigou à 100m de MRS</span>
+        </li>
+    </ul>
+ </div>
+            </div>
+
+            <!-- Colonne Liens rapides -->
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-uppercase mb-4" style="color: #81c784;">Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#about" class="text-white text-decoration-none">À propos</a></li>
+                    <li class="mb-2"><a href="#services" class="text-white text-decoration-none">Services</a></li>
+                    <li class="mb-2"><a href="#product" class="text-white text-decoration-none">Produits</a></li>
+                    <li class="mb-2"><a href="#testimonial" class="text-white text-decoration-none">Témoignages</a></li>
+                    <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+            </ul>
+        </div>
+
+
+              
+     <!-- Colonne Services -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="text-uppercase mb-4" style="color: #81c784;">Nos services</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle me-2" style="color: #81c784;"></i> Accompagnement des coopératives</li>
+                    <li class="mb-2"><i class="bi bi-check-circle me-2" style="color: #81c784;"></i> Financement agricole</li>
+                    <li class="mb-2"><i class="bi bi-check-circle me-2" style="color: #81c784;"></i> Commercialisation</li>
+                    <li class="mb-2"><i class="bi bi-check-circle me-2" style="color: #81c784;"></i> Formations techniques</li>
+                    <li><i class="bi bi-check-circle me-2" style="color: #81c784;"></i> Conseil agricole</li>
+                </ul>
+            </div>
+
+            <!-- Colonne Réseaux sociaux & Newsletter -->
+            <div class="col-lg-3 col-md-6">
+               <h5 class="text-uppercase mb-4" style="color: #81c784;">Suivez-nous</h5>
+                <div class="social-links mb-4">
+                    <a href="#" class="text-white me-3" aria-label="Facebook"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="text-white me-3" aria-label="Twitter"><i class="bi bi-twitter fs-4"></i></a>
+                    <a href="#" class="text-white me-3" aria-label="LinkedIn"><i class="bi bi-linkedin fs-4"></i></a>
+                    <a href="#" class="text-white" aria-label="WhatsApp"><i class="bi bi-whatsapp fs-4"></i></a>
+                </div>
+
+                <h5 class="text-uppercase mb-3" style="color: #81c784;">Newsletter</h5>
+                <form class="mb-3">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Votre email" aria-label="Email">
+                        <button class="btn btn-success" type="submit">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                </form>
+                <small class="text-muted">Abonnez-vous pour recevoir nos actualités.</small>
             </div>
         </div>
 
-    </footr>
+        <hr class="my-4 bg-secondary">
 
-    <!-- end footer -->
-    <!-- Javascript files-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/plugin.js"></script>
-    <!-- sidebar -->
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
-    <!-- javascript -->
-    <script src="js/owl.carousel.js"></script>
-    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".fancybox").fancybox({
-                openEffect: "none",
-                closeEffect: "none"
-            });
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; 2023 BIO-STONE SARL. Tous droits réservés.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Mentions légales</a></li>
+                    <li class="list-inline-item mx-2">•</li>
+                    <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></li>
+                    <li class="list-inline-item mx-2">•</li>
+                    <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">Conditions d'utilisation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
-            $(".zoom").hover(function () {
+<style>
+    .footer {
+        background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    
+    .footer a:hover {
+        color: #81c784 !important;
+        transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+        transform: translateY(-3px);
+        display: inline-block;
+    }
+    
+    .input-group button:hover {
+        background-color: #2e7d32 !important;
+    }
+    .bouton-savoir-plus {
+  background-color: #90ee90; /* vert clair */
+  color: white;              /* texte blanc */
+  border: none;              /* optionnel, pour enlever la bordure */
+  padding: 10px 20px;        /* pour un peu d'espace à l'intérieur */
+  cursor: pointer;           /* pour changer le curseur au survol */
+  border-radius: 5px;        /* coins arrondis optionnels */
+  font-weight: bold;         /* texte en gras optionnel */
+}
 
-                $(this).addClass('transition');
-            }, function () {
+</style>
 
-                $(this).removeClass('transition');
-            });
-        });
-    </script>
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Vos scripts personnalisés -->
+    <script src="{{ asset('js/custom.js') }}"></script>
+    
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap" async defer></script>
     <script>
         // This example adds a marker to indicate the position of Bondi Beach in Sydney,
         // Australia.

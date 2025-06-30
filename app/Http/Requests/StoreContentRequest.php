@@ -26,9 +26,8 @@ class StoreContentRequest extends FormRequest
             'title' => 'required|string|max:255',
             'image' => 'required|file|mimes:jpeg,png,pdf,doc,docx|max:2048',
             'description' => 'required|string',
-            'category' => 'required|in:article,news,tutorial',
             'publish_date' => 'nullable|date',
-            
+
             // ...
 
         ];

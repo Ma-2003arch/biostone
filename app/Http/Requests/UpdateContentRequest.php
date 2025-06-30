@@ -17,9 +17,8 @@ class UpdateContentRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,doc,docx|max:2048',
-            'category' => 'required|in:article,news,tutorial',
             'publish_date' => 'nullable|date',
-           
+
         ];
     }
 }

@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\ContactController;
+use App\Models\Contact;
 
 // Route d'accueil
 Route::get('/', function () {
@@ -13,6 +16,16 @@ Route::get('/', function () {
 
 // ✅ Route PUBLIQUE : accessible à tout le monde
 Route::get('/content', [ContentController::class, 'liste_content'])->name('content.liste');
+
+
+
+// 🟢 Affiche la page de contact (GET)
+Route::get('/contact', function () {
+    return view('emails.form'); // la page où tu as ton formulaire
+})->name('emails.form');
+
+// 🟢 Traite l'envoi du formulaire (POST)
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // 🔐 Routes ADMIN : accessibles uniquement aux administrateurs connectés
 Route::middleware(['auth', 'admin'])->prefix('content')->group(function () {
@@ -32,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 // Dashboard admin
 Route::prefix('admin')

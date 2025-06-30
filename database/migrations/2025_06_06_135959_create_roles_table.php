@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::dropIfExists('roles'); // Supprime d'abord si elle existe
         Schema::create('roles', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
-            $table->timestamps();
+            $table->uuid('role_id');
+            $table->uuid('user_id');
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -10,10 +10,39 @@
         .content-card {
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             border-radius: 0.5rem;
+            border: none;
         }
         .required-field::after {
             content: " *";
             color: red;
+        }
+        .image-preview-container {
+            max-height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+        .image-preview {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        .file-info {
+            background-color: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 0.85rem;
+        }
+        .form-control:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .invalid-feedback.d-block {
+            display: block !important;
         }
     </style>
 </head>
@@ -24,7 +53,7 @@
             @if(session('success'))
                 <div class="col-lg-8">
                     <div class="alert alert-success alert-dismissible fade show">
-                        {{ session('success') }}
+                        <i class="bi bi-check-circle me-2"></i> {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 </div>
@@ -33,7 +62,7 @@
             @if(session('error'))
                 <div class="col-lg-8">
                     <div class="alert alert-danger alert-dismissible fade show">
-                        {{ session('error') }}
+                        <i class="bi bi-exclamation-triangle me-2"></i> {{ session('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 </div>
@@ -41,9 +70,11 @@
 
             @if($errors->any())
                 <div class="col-lg-8">
-                    <div class="alert alert-danger">
-                        <h5><i class="bi bi-exclamation-octagon"></i> Erreur de validation</h5>
-                        <ul class="mb-0">
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <h5 class="d-flex align-items-center">
+                            <i class="bi bi-exclamation-octagon me-2"></i> Erreur de validation
+                        </h5>
+                        <ul class="mb-0 ps-3">
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -57,133 +88,110 @@
                 <div class="card content-card">
                     <div class="card-header bg-primary text-white">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h2 class="h4 mb-0"><i class="bi bi-plus-circle"></i> Ajouter un contenu</h2>
+                            <h2 class="h4 mb-0"><i class="bi bi-plus-circle me-2"></i> Ajouter un contenu</h2>
                             <a href="{{ route('content.liste') }}" class="btn btn-light btn-sm">
-                                <i class="bi bi-arrow-left"></i> Retour
+                                <i class="bi bi-arrow-left me-1"></i> Retour
                             </a>
                         </div>
                     </div>
                     
                     <div class="card-body">
-                        <form action="{{ route('content.ajouter.traitement') }}" method="POST" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('content.ajouter.traitement') }}" enctype="multipart/form-data" novalidate>
                             @csrf
-                            
-                            <!-- Catégorie -->
+
                             <div class="mb-3">
-                                <label for="category" class="form-label fw-bold required-field">Catégorie</label>
-                                <select name="category" id="category" class="form-select @error('category') is-invalid @enderror" required>
-                                    <option value="">-- Sélectionnez --</option>
-                                    <option value="article" {{ old('category') == 'article' ? 'selected' : '' }}>Article</option>
-                                    <option value="news" {{ old('category') == 'news' ? 'selected' : '' }}>Actualité</option>
-                                    <option value="tutorial" {{ old('category') == 'tutorial' ? 'selected' : '' }}>Tutoriel</option>
-                                </select>
-                                @error('category')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <!-- Titre -->
-                            <div class="mb-3">
-                                <label for="title" class="form-label fw-bold required-field">Titre</label>
-                                <input type="text" name="title" id="title" 
-                                       class="form-control @error('title') is-invalid @enderror"
-                                       value="{{ old('title') }}" required>
+                                <label for="title" class="form-label required-field">Titre</label>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror" 
+                                       id="title" name="title" required 
+                                       value="{{ old('title') }}">
                                 @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                             
-                            <!-- Description -->
                             <div class="mb-3">
-                                <label for="description" class="form-label fw-bold required-field">Description</label>
-                                <textarea name="description" id="description" rows="5"
-                                          class="form-control @error('description') is-invalid @enderror" required>{{ old('description') }}</textarea>
+                                <label for="description" class="form-label required-field">Description</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" 
+                                          id="description" name="description" rows="3" required>{{ old('description') }}</textarea>
                                 @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                             
-                            <!-- Image -->
                             <div class="mb-3">
-                                <label for="image" class="form-label fw-bold required-field">Image</label>
-                                <input type="file" name="image" id="image" 
-                                       class="form-control @error('image') is-invalid @enderror" required
-                                       accept="image/jpeg, image/png">
-                                <div class="form-text">Formats acceptés: JPEG, PNG (Max 2MB)</div>
-                                <div id="image-preview" class="mt-2 text-center"></div>
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            
-                            <!-- Date de publication -->
-                            <div class="mb-3">
-                                <label for="publish_date" class="form-label fw-bold">Date de publication</label>
-                                <input type="date" name="publish_date" id="publish_date"
-                                       class="form-control @error('publish_date') is-invalid @enderror"
-                                       value="{{ old('publish_date', now()->format('Y-m-d')) }}">
+                                <label for="publish_date" class="form-label required-field">Date de publication</label>
+                                <input type="date" class="form-control @error('publish_date') is-invalid @enderror" 
+                                       id="publish_date" name="publish_date" required
+                                       value="{{ old('publish_date', date('Y-m-d')) }}">
                                 @error('publish_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                             
-                            <!-- Boutons -->
-                            <div class="d-flex justify-content-between pt-3 border-top">
-                                <button type="reset" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-circle"></i> Annuler
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-save"></i> Enregistrer
-                                </button>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Image</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" 
+                                       id="image" name="image" accept="image/jpeg,image/png,image/gif,image/webp" 
+                                       aria-describedby="imageHelp">
+                                <small id="imageHelp" class="form-text text-muted">
+                                    Formats acceptés: JPEG, PNG, GIF, WEBP (max 2MB)
+                                </small>
+                                @error('image')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                                <div id="image-preview-container" class="image-preview-container mt-2">
+                                    <img id="image-preview" class="image-preview" src="#" alt="Aperçu de l'image">
+                                    <div id="file-info" class="file-info"></div>
+                                </div>
                             </div>
+                            
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Aperçu de l'image sélectionnée
-        document.getElementById('image').addEventListener('change', function(e) {
+        const imageInput = document.getElementById('image');
+        const previewContainer = document.getElementById('image-preview-container');
+        const preview = document.getElementById('image-preview');
+        const fileInfo = document.getElementById('file-info');
+        
+        previewContainer.style.display = 'none';
+        preview.src = '#';
+        fileInfo.textContent = '';
+
+        imageInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
-            const preview = document.getElementById('image-preview');
             
+            previewContainer.style.display = 'none';
+            preview.src = '#';
+            fileInfo.textContent = '';
+
             if (file) {
                 if (file.size > 2 * 1024 * 1024) {
                     alert('Le fichier est trop volumineux (max 2MB)');
                     e.target.value = '';
-                    preview.innerHTML = '';
                     return;
                 }
 
                 if (!file.type.match('image.*')) {
                     alert('Seules les images sont acceptées');
                     e.target.value = '';
-                    preview.innerHTML = '';
                     return;
                 }
 
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    preview.innerHTML = `
-                        <div class="border p-2 rounded">
-                            <img src="${e.target.result}" class="img-fluid" style="max-height: 200px;">
-                            <div class="mt-2 small text-muted">${file.name} (${(file.size/1024).toFixed(1)} KB)</div>
-                        </div>
-                    `;
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    fileInfo.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
                 }
                 reader.readAsDataURL(file);
-            } else {
-                preview.innerHTML = '';
-            }
-        });
-
-        // Définir la date par défaut à aujourd'hui
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!document.getElementById('publish_date').value) {
-                document.getElementById('publish_date').valueAsDate = new Date();
             }
         });
     </script>
